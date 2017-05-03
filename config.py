@@ -7,6 +7,8 @@ geo=""
 topic=""
 bound=[]
 streaming_topic=[]
+max_size=0
+database_name=''
 
 #to covert the type and put in another list
 def copy_convert(old_list,new_list,option):
@@ -28,6 +30,8 @@ def get_config(file_1):
   global topic
   global bound
   global streaming_topic
+  global max_size
+  global database_name
     
   #to read file for these data
   count=0
@@ -51,4 +55,8 @@ def get_config(file_1):
        if count==7:
           temp1=line.split(',')
           copy_convert(temp1,streaming_topic,0)
+       if count==8:
+          max_size=(int)(line)
+       if count==9:
+          database_name=line
        count+=1

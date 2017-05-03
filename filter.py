@@ -1,17 +1,16 @@
-from gender_detector import GenderDetector
 import couchdb
 import re
 
 #to use a list to store tweetid to filter duplicates
-tweetId=[]
-pattern="[a-zA-Z ]+"
+#tweetId=[]
+#pattern="[a-zA-Z ]+"
 ##to check tweet_id to filter duplicates
-def  filter_duplicate(tweet_id):
-    if tweet_id in tweetId:
-       return False
-    else:
-       tweetId.append(tweet_id)
-       return True
+#def  filter_duplicate(tweet_id):
+#    if tweet_id in tweetId:
+#       return False
+#    else:
+#       tweetId.append(tweet_id)
+#       return True
 
 ##to identify gender by first name
 #def gender_identify(name):
@@ -31,3 +30,16 @@ def checkText(temp_text):
     else:
         return temp_text
 
+# to split hashtags and combine topic and topic splict by ','
+def split_combine(a):
+    if len(a)>0:
+        str=''
+        count=0
+        for i in a:
+           str=str+i[u'text']+','
+           count+=1
+           if count== len(a):
+              str=str+i[u'text']
+        return str
+    else:
+       return None
