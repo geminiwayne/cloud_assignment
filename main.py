@@ -7,14 +7,13 @@ import threading
 import sys
 
 if __name__=="__main__":
-    file = sys.argv[1]
-#    file='config_5.txt'
+    # file = sys.argv[1]
+    file='config_5.txt'
     config.get_config(file)
     max_volum=(int)(config.max_size)
     max_history_tweet= max_volum*2/3
     myStreamListener =new_twitter.MyStreamListener()
     new_twitter.get_max(max_volum)
-    history_twitter.tweeet_crawl(max_history_tweet)
     twitter_stream = tweepy.Stream(auth = new_twitter.get_connection(), listener=myStreamListener)
     # to use thread to control two crawling fucntion
     try:
