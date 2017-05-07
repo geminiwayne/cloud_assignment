@@ -34,8 +34,8 @@ class MyStreamListener(tweepy.StreamListener):
     try:
         # access to couchdb server and Error handling
         try:
-            couch=couchdb.Server('http://0.0.0.0:5984/')
-            # couch =couchdb.Server('http://admin:password@115.146.93.201:5984/')
+#            couch=couchdb.Server('http://0.0.0.0:5984/')
+            couch =couchdb.Server('http://admin:password@115.146.93.201:5984/')
             db= couch['twdata']
         except:
             print ("trouble in couchdb connection !")
@@ -61,13 +61,13 @@ class MyStreamListener(tweepy.StreamListener):
         # save valid and useful tweet info into couchdb
         #include data, tweet_id, content, favorite_count, polarity of tweet, subjectivity of tweet, lat, lng, gender, topic
         if new_tweet_count< new_max_count:
-            doc={'_id':(str)(status.id),'content':filter.checkText(status.text),'user':temp_name,'date':temp_date,'polarity':testimonial.sentiment.polarity,'subjectivity':testimonial.sentiment.subjectivity,'favorite_count':status.favorite_count,'lat':temp_lat,'lng':temp_lng,'source':filter.checkText(status.source),'location':filter.checkText(status.user.location),'topic':filter.split_combine(tweet._json[u'entities'][u'hashtags']),'gender':filter.gender_identify(filter.checkText(temp_name))}
+            doc={'_id':(str)(status.id),'content':filter.checkText(status.text),'user':temp_name,'date':temp_date,'polarity':testimonial.sentiment.polarity,'subjectivity':testimonial.sentiment.subjectivity,'favorite_count':status.favorite_count,'lat':temp_lat,'lng':temp_lng,'source':filter.checkText(status.source),'location':filter.checkText(status.user.location),'topic':filter.split_combine(status.entities[u'hashtags']),'gender':filter.gender_identify(filter.checkText(temp_name))}
             try:
                 db.save(doc)
                 new_tweet_count+=1
             except couchdb.http.ResourceConflict:
+                print (time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())),"new_twitter sleep")
                 new_tweet_count+=0
-            gc.collect()
             return True
         #Error handling
         else:
