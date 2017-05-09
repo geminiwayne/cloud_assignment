@@ -78,8 +78,9 @@ class MyStreamListener(tweepy.StreamListener):
        print("Error on_status: %s" % str(e))
    #Error handling
    def on_error(self, status):
-        print(status)
-        return True
+       if status == 420:
+           print("Rate limit!")
+       return True
     
    #Timeout handling
    def on_timeout(self):
