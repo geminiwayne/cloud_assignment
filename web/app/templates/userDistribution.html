@@ -1,0 +1,36 @@
+{% extends 'Scenarios.html' %}
+
+{% block title %}Users{% endblock %}
+
+{% block intro %}
+<h5>scenario 4</h5>
+<h5>Which city has the most twitter users?</h5>
+{% endblock %}
+
+{% block head %}
+    <script type="text/javascript">
+        // Load the Visualization API and the corechart package.
+        google.charts.load('current', {'packages':['corechart']});
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+             $.getJSON("{{ url_for('userDistribution_data') }}", function (data) {
+                var data1 = new google.visualization.DataTable(data);
+                data1.sort({column: 1, desc: true}); 
+                var options = {
+                    height: 500,
+                    title: 'The number of tweeter users in four big cities?',
+                };
+                var chart1 = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+             chart1.draw(data1, options);
+            });
+         }
+
+    </script>
+{% endblock %}
+
+{% block column %}
+    <div id="chart_div"></div>
+{% endblock %}

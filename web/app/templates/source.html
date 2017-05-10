@@ -1,0 +1,34 @@
+{% extends 'Scenarios.html' %}
+
+{% block title %}sourcePolarity{% endblock %}
+
+{% block intro %}
+<h5>scenario 5</h5>
+<h5>What is people sentiment when using different devices?</h5>
+{% endblock %}
+{% block head %}
+    <script type="text/javascript">
+        // Load the Visualization API and the corechart package.
+        google.charts.load('current', {'packages':['corechart']});
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+             $.getJSON("{{ url_for('sourcePolarity_data') }}", function (data) {
+                var data2 = new google.visualization.DataTable(data);
+                var options = {
+                    height: 500,
+                    title: 'How about average sentiment towards on different devices?',
+                };
+                var chart2 = new google.visualization.PieChart(document.getElementById('chart_div2'));
+             chart2.draw(data2, options);
+            });
+         }
+
+    </script>
+{% endblock %}
+
+{% block column %}
+    <div id="chart_div2"></div>
+{% endblock %}

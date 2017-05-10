@@ -1,0 +1,35 @@
+{% extends 'Scenarios.html' %}
+
+{% block title %}hotTopic{% endblock %}
+
+{% block intro %}
+<h5>scenario 2</h5>
+<h5>What are 10 hot topics and 10 most popular tweeter users??</h5>
+{% endblock %}
+
+{% block head %}
+    <script type="text/javascript">
+        // Load the Visualization API and the corechart package.
+        google.charts.load('current', {'packages':['corechart']});
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+             $.getJSON("{{ url_for('hotTopic_data') }}", function (data) {
+                var data1 = new google.visualization.DataTable(data);
+                data1.sort({column: 1, desc: true}); 
+                var options = {
+                    height: 500,
+                    title: '10 Hot Topics'
+                };
+                var chart1 = new google.visualization.BarChart(document.getElementById('chart_div1'));
+             chart1.draw(data1, options);
+            });
+         }
+    </script>
+{% endblock %}
+
+{% block column %}
+    <div id="chart_div1"></div>
+{% endblock %}

@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}{% endblock %}</title>
+
+<link href="{{ url_for('static', filename='Scenarios.css') }}" rel="stylesheet" type="text/css">
+<!--Load the AJAX API-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.0/semantic.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+<!-- Main Container -->
+<div class="container"> 
+  <!-- Header -->
+  <header class="header">
+    <h4 class="logo">Cluster & Cloud Computing</h4>
+    <h4 class="logo2">Australian City Analytics</h4>
+  </header>
+  <!-- Hero Section -->
+     <div class="intro">
+      <h5>{% block intro %}{% endblock %}</h5>
+    </div>
+  <!-- Stats Gallery Section -->
+{% block main %}
+    <main class="chartContainer">
+        <div class="gallery">
+            {% block column %}{% endblock %}
+        </div>
+    </main>
+{% endblock %}
+  <!-- Footer Section -->
+  <footer id="contact">
+    <p class="hero_header">GET IN TOUCH WITH ME</p>
+    <div class="button">EMAIL ME </div>
+  </footer>
+  <!-- Copyrights Section -->
+  <div class="copyright">&copy;2017 - <strong>Team4</strong></div>
+</div>
+<!-- Main Container Ends -->
+</body>
+</html>

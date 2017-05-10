@@ -1,0 +1,37 @@
+{% extends 'Scenarios.html' %}
+
+{% block title %}language{% endblock %}
+
+{% block intro %}
+<h5>scenario 1</h5>
+<h5>What languages used when people write tweets?</h5>
+{% endblock %}
+
+{% block head %}
+    <script type="text/javascript">
+        // Load the Visualization API and the corechart package.
+        google.charts.load('current', {'packages':['corechart']});
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            $.getJSON("{{ url_for('language_data') }}", function (data) {
+                var data1 = new google.visualization.DataTable(data);
+                var options = {
+                    height: 400,
+                    title: 'Language Distribution'
+                };
+                var chart1 = new google.visualization.PieChart(document.getElementById('chart_div1'));
+             chart1.draw(data1, options);
+            });
+
+
+
+
+        }
+    </script>
+{% endblock %}
+{% block column %}
+    <div id="chart_div1"></div>
+{% endblock %}

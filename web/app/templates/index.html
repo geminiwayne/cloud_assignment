@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comp90024-Cluster and Cloud Computing</title>
+<link href="{{ url_for('static', filename='Index.css') }}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<!-- Main Container -->
+<div class="container"> 
+  <!-- Header -->
+  <header class="header">
+    <h4 class="logo">Cluster & Cloud Computing</h4>
+    <h4 class="logo2"><strong>Australian City Analytics</strong></h4>
+  </header>
+  <!-- Hero Section -->
+  <section class="intro">
+    <div class="mapContainer">
+      <img src="{{ url_for('static', filename='australiaMap2.png') }}" alt="" class="profile"> </div>
+    <div class="column">
+
+      <div class = "subcolumn">
+         <p>The project is to develop a Cloud-based solution that exploits a multitude of virtual machines across the NeCTAR Research Cloud for harvesting as many tweets as possible from across the cities of Australia on the NeCTAR Research Cloud. These tweets are stored in CouchDB database. Then they are used for undertaking a variety of social media data analytics scenarios that tell interesting stories of life in your cities. Our team analyzed up to 10 scenarios and importantly inclueded the comparisions with the data available within the AURIN platform to improve our knowledge of life in the cities of Australia. with containing the amalgamated collection of Tweets from the harvester applications.  </p>
+      </div>
+
+      <div class = "members">
+        <h3>Team 4
+        <img src="{{ url_for('static', filename='jason.jpg') }}" alt="" class="member">
+        <img src="{{ url_for('static', filename='dong.jpg') }}" alt="" class="member"> 
+        <img src="{{ url_for('static', filename='sixue.jpg') }}" alt="" class="member"> 
+        <img src="{{ url_for('static', filename='dina.jpg') }}" alt="" class="member"> 
+        <img src="{{ url_for('static', filename='molly.jpg') }}" alt="" class="member"> 
+        </h3>
+      </div>
+
+    </div>
+  </section>
+  <!-- Stats Scenarios Section -->
+  <div class="Scenarios">
+    <div class="thumbnail"> <a href="language"><img src="{{ url_for('static', filename='language.png') }}" alt="" width="2000" class="cards"/></a>
+      <h4>Scenario 1</h4>
+      <p class="tag">Language Distribution</p>
+      <p class="text_column">This scenario focus on the language distribution refers to which language people are writtening in tweets.</p>
+    </div>
+    <div class="thumbnail"> <a href="hotTopic"><img src="{{ url_for('static', filename='topic.jpg') }}" alt="" width="2000" class="cards"/></a>
+      <h4>Scenario 2</h4>
+      <p class="tag">Top 10 Hot Topics</p>
+      <p class="text_column">we investigated the top 10 hot topics to track what people are talking about recently. </p>
+    </div>
+    <div class="thumbnail"> <a href="negativeCity"><img src="{{ url_for('static', filename='sentiment.png') }}" alt="" width="2000" class="cards"/></a>
+      <h4>Scenario 3</h4>
+      <p class="tag">Negative Sentiment in Different Cities</p>
+      <p class="text_column">In this scenario, we compared the rates of tweets with negative polarity value located in several cities, including Melbourne, Sydney, Brisbane, Perth and others.</p>
+    </div>
+    <div class="thumbnail"> <a href="userDistribution"><img src="{{ url_for('static', filename='userdis.png') }}" alt="" width="2000" class="cards"/></a>
+      <h4>Scenario 4</h4>
+      <p class="tag">Tweeter Users Distribution</p>
+      <p class="text_column">This scenarios focuses on how many tweeter users in several major Australian cities: Sydney,Melbourne,Brisbane and others.</p>
+    </div>
+  </div>
+  <div class="Scenarios">
+    <div class="thumbnail"> <a href="source"><img src="{{ url_for('static', filename='devices.jpg') }}" alt="" width="2000" class="cards"/></a>
+      <h4>Scenario 5</h4>
+      <p class="tag">Sentiment on Different Device</p>
+      <p class="text_column">In order to figure out users’ sentiment on different device, especially mobile device, we designed a view to obtain the average polarity values on a few types of source equipment, which are iPhone, Android, iPad and others.</p>
+    </div>
+    <div class="thumbnail"> <a href="sport"><img src="{{ url_for('static', filename='AFL.jpg') }}" alt="" width="2000" class="cards"/></a>
+      <h4>Scenario 6</h4>
+      <p class="tag">Sentiment towards sports</p>
+      <p class="text_column">To make sense how much people like the AFL teams, this scenario is designed to obtain the average value of polarity when people mention them.</p>
+    </div>
+    <div class="thumbnail"> <a href="24hour"><img src="{{ url_for('static', filename='sentiment2.png') }}" alt="" width="2000" class="cards"/></a>
+      <h4>Scenario 7</h4>
+      <p class="tag">24-Hour Happiness Trend</p>
+      <p class="text_column">This scenario investigates the rate of the twitters which is of a positive polarity value among all twitter data, to reflect the happiness trend during the whole day.
+</p>
+    </div>
+    <div class="thumbnail"> <a href="weather"><img src="{{ url_for('static', filename='weather.gif') }}" alt="" width="2000" class="cards"/></a>
+      <h4>Scenario 8</h4>
+      <p class="tag">Sentiment towards Bad Weather</p>
+      <p class="text_column">Considering people may have different emotions on bad weather, this app is also implemented to compare uses’ sentiment in different kinds of bad weather. </p>
+    </div>
+  </div>
+  <!-- Footer Section -->
+  <footer id="contact">
+    <p class="hero_header">GET IN TOUCH WITH US</p>
+    <div class="button">EMAIL US </div>
+  </footer>
+  <!-- Copyrights Section -->
+  <div class="copyright">&copy;2017 - <strong>Team 4</strong></div>
+</div>
+<!-- Main Container Ends -->
+</body>
+</html>

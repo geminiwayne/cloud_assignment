@@ -1,0 +1,37 @@
+{% extends 'Scenarios.html' %}
+
+{% block title %}hotTopic{% endblock %}
+
+{% block intro %}
+<h5>scenario 3</h5>
+<h5>People in which city has the most negative sentiment?</h5>
+{% endblock %}
+
+
+{% block head %}
+    <script type="text/javascript">
+        // Load the Visualization API and the corechart package.
+        google.charts.load('current', {'packages':['corechart']});
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+             $.getJSON("{{ url_for('negativeCity_data') }}", function (data) {
+                var data1 = new google.visualization.DataTable(data);
+                var options = {
+                    height: 500,
+                    title: 'Which City has the most negative sentiment?',
+                    subtitle: 'Count by num of negative tweets'
+                };
+                var chart1 = new google.visualization.PieChart(document.getElementById('chart_div'));
+             chart1.draw(data1, options);
+            });
+         }
+
+    </script>
+{% endblock %}
+
+{% block column %}
+    <div id="chart_div"></div>
+{% endblock %}

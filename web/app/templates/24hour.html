@@ -1,0 +1,50 @@
+{% extends 'Scenarios.html' %}
+
+{% block title %}24 hour{% endblock %}
+
+{% block intro %}
+<h5>scenario 7</h5>
+<h5>When people are full of energy? Are they willing to send tweets during that time?</h5>
+{% endblock %}
+
+{% block head %}
+    <script type="text/javascript">
+        // Load the Visualization API and the corechart package.
+        google.charts.load('current', {'packages':['corechart']});
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            $.getJSON("{{ url_for('hour_data_avg') }}", function (data) {
+                var data1 = new google.visualization.DataTable(data);
+                var options = {
+                    height: 400,
+                    title: '24 hour sentiment distribution'
+                };
+                var chart1 = new google.visualization.LineChart(document.getElementById('chart_div1'));
+             chart1.draw(data1, options);
+            });
+
+             $.getJSON("{{ url_for('hour_data_number') }}", function (data) {
+                var data2 = new google.visualization.DataTable(data);
+                var options = {
+                    height: 400,
+                    title: 'The number of tweets during whole day'
+                };
+                var chart2 = new google.visualization.LineChart(document.getElementById('chart_div2'));
+             chart2.draw(data2, options);
+            });
+
+
+            
+
+
+
+        }
+    </script>
+{% endblock %}
+{% block column %}
+    <div id="chart_div1"></div>
+    <div id="chart_div2"></div>
+{% endblock %}
