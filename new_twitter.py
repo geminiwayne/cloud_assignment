@@ -44,7 +44,7 @@ class MyStreamListener(tweepy.StreamListener):
         # access to couchdb server and Error handling
         try:
             couch =couchdb.Server('http://admin:password@115.146.93.201:5984/')
-            db= couch['twdata']
+            db= couch['new']
         except:
             print ("trouble in couchdb connection !")
         #filter duplicates by tweetid
