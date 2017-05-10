@@ -1,0 +1,12 @@
+---
+- name: diskspace_mornitor
+  hosts: dbservers
+  gather_facts: no
+  vars:
+   path: /home/ubuntu
+
+  tasks:
+    - name: check diskspace
+      shell: "df -hP|awk 'NR>1 && int($5) > 30'"
+      register: check_out
+    - debug: msg="disk space {{check_out.stdout}}"

@@ -1,0 +1,8 @@
+---
+- hosts: webservers
+  sudo: yes
+  tasks:
+      - name: pip install flask
+        pip: name=flask
+      - name: pip install uwsgi
+        pip: name=uwsgi
