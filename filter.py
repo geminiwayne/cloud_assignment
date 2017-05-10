@@ -2,16 +2,7 @@
 import re
 from gender_detector import GenderDetector
 
-#to use a list to store tweetid to filter duplicates
-#tweetId=[]
 pattern="[a-zA-Z ]+"
-##to check tweet_id to filter duplicates
-#def  filter_duplicate(tweet_id):
-#    if tweet_id in tweetId:
-#       return False
-#    else:
-#       tweetId.append(tweet_id)
-#       return True
 
 #to identify gender by first name
 def gender_identify(name):
