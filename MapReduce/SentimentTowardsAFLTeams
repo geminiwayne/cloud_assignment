@@ -8,23 +8,23 @@
 * Sixue Yang        722804
 */
 
-// This MapReduce is designed based on the scenario of "Sentiment towards Bad Weather"
+// This MapReduce is designed based on the scenario of "Sentiment towards AFL Teams"
 
-// Map functin to match each tweet to a particular keyword
-// referring to a type of bad weather, and classify them
-// according to the value of polarity in it
+// Map function to match each tweet to a particular keyword
+// referring to each AFL team, and classify them according
+// to the value of polarity in it
 function(doc){
-var keywords = ["rain","wind","cloudy","storm","fog","overcast","thunderstorm","Drizzle","Showers","rainy "];
-    var text = doc.content.toLowerCase();
+    var keywords = ["MCG","AFL","theheraldsun","football","Crows","Lions","Blues","Magpies","Bombers","Dockers","Cats","Suns","Giants","Hawks","Demons","Kangaroos","power","Tigers","Saints","Swans","Eagles","Bulldogs"];
+    var text = doc.content
     for(i in keywords) {
-        if(text.search(keywords[i].toLowerCase()) > -1){
+        if(text.search(keywords[i]) > -1){
             if(doc.polarity >0){
-                emit(keywords[i],1);
+              emit(keywords[i],1);
             }
             else if(doc.polarity < 0){
-              emit (keywords[i], -1);
+              emit(keywords[i],-1);
             }
-            else
+            else 
               emit(keywords[i], 0);
         }
     }
@@ -34,8 +34,8 @@ var keywords = ["rain","wind","cloudy","storm","fog","overcast","thunderstorm","
 
 
 // Reduce function to sum up the number of tweets in each
-// classification, and calculate the average value of polarity
-// in each of them
+// classification, and calculate the average value of 
+// polarity in each of them
 function(keys, values, rereduce) {
     if (!rereduce){
         var length = values.length
