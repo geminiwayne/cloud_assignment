@@ -1,3 +1,15 @@
+/*
+* Team 4
+* Melbourne, Sydney, Brisbane, Perth
+* Danping Zeng      777691
+* Dong Wang         773504
+* Jia Zhen          732355
+* Jinghan Liang     732329
+* Sixue Yang        722804
+* 
+* This is a tool used to sort json objects by their values
+*/
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -48,12 +60,6 @@ public class SortByValue {
 	        for (Map.Entry<String, Integer> entry : list) {
 	            sorted.put(entry.getKey(), entry.getValue());
 	        }
-	        
-//	        // Print map
-//	        for (Map.Entry<String, Integer> entry : sorted.entrySet()) {
-//	            System.out.println("Key : " + entry.getKey()
-//	                    + " Value : " + entry.getValue());
-//	        }
 	        
 	        // Convert map into JSONArray
 	        JSONArray NewJsons = new JSONArray();
