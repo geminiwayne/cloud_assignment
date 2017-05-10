@@ -37,7 +37,7 @@ def tweeet_crawl(maxTweets):
   # access to couchdb server and Error handling
   try:
       couch =couchdb.Server('http://admin:password@115.146.93.201:5984/')
-      db= couch['twdata']
+      db= couch['new']
   except:
       print ("Trouble in couchdb connection !")
   while history_tweet_count < maxTweets:
