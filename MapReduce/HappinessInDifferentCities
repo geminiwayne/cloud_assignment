@@ -1,0 +1,67 @@
+/*
+* Team 4
+* Melbourne, Sydney, Brisbane, Perth
+* Danping Zeng      777691
+* Dong Wang         773504
+* Jia Zhen          732355
+* Jinghan Liang     732329
+* Sixue Yang        722804
+*/
+
+// This MapReduce is designed based on scenario of "Happiness in Different Cities"
+
+// Map function to filter the tweets in which the value 
+// of polarity is greater than 0 in different cities
+function (doc) {
+  var city = doc.location;
+  var polarity = doc.polarity;
+  
+  if(city.search("Melbourne") > -1){
+    if(polarity > 0)
+      emit("Melbourne", 1);
+    else
+      emit("Melbourne", 0);
+  }
+  else if(city.search("Sydney") > -1) {
+    if(polarity > 0)
+      emit("Sydney", 1);
+    else
+      emit("Sydney", 0);
+  }
+  else if(city.search("Brisbane") > -1) {
+    if(polarity > 0)
+      emit("Brisbane", 1);
+    else
+      emit("Brisbane", 0);
+  }
+  else if(city.search("Perth") > -1) {
+    if(polarity > 0)
+      emit("Perth", 1);
+    else
+      emit("Perth", 0);
+  }
+  else {
+    if(polarity > 0)
+      emit("other", 1);
+    else
+      emit("other", 0);
+  }
+}
+
+
+
+// Reduce function to count the total number of the tweets
+// which are of positive polarities in each city,
+// and calculate their proportion among all tweets
+function(keys, values, rereduce) {
+    if (!rereduce){
+        var length = values.length
+        return [sum(values) / length, length]
+    }else{
+        var length = sum(values.map(function(v){return v[1]}))
+        var avg = sum(values.map(function(v){
+        return v[0] * (v[1] / length)
+    }))
+    return [avg, length]
+    }
+}

@@ -8,7 +8,7 @@
 * Sixue Yang        722804
 */
 
-
+// This MapReduce is designed based on the scenario of “Top 10 Hot Topics”
 
 // Map function to match each twitter to a particular topic based on "topics" harvested
 function (doc) {
