@@ -1,3 +1,12 @@
+#################################
+#Team 4                         #
+#Melbourne,Sydney,Brisbane,Perth#
+#Dong Wang     773504           #
+#Danping Zeng  777691           #
+#Jia Zhen      732355           #
+#Jinghan Liang 732329           #
+#Sixue Yang    722804           #
+#################################
 # -*- coding: utf-8 -*-
 import re
 from gender_detector import GenderDetector
