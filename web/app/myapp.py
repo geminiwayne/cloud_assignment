@@ -14,6 +14,7 @@ from flask import jsonify
 app = Flask(__name__)
 server = Server('http://admin:password@115.146.93.201:5984/')
 db = server['twitter']
+db2 = server['twdata']
 
 @app.route('/')
 def arch():
@@ -33,7 +34,7 @@ def userDistribution():
 @app.route('/negativeCity')
 def negativeCity():
 
-    return render_template('negativeCity.html')
+    return render_template('districtPolarity.html')
 
 @app.route('/hotTopic')
 def hotTopic():
@@ -63,10 +64,23 @@ def sport():
 
 
 #data API to return the data from couchdb
+@app.route('/districtPolarity_data')
+def districtPolarity_data():
+    rows = []
+    for row in list(db2.view('polarity/DistrictPolarity',group=True)):
+            rows.append({'c': [{'v': row.key}, {'v': row.value[0]}]})
+
+    response = {
+        'cols': [{'id': 'DistrictPolarity', 'label': 'DistrictPolarity', 'type': 'string'},
+                 {'id': 'avg_polarity', 'label': 'avg_polarity', 'type': 'number'}],
+        'rows': rows
+    }
+    return jsonify(response)
+
 @app.route('/popular_data')
 def popular_data():
     rows = []
-    for row in list(db.view('popularity/top10', group=True)):
+    for row in list(db2.view('popularity/top10', group=True)):
             rows.append({'c': [{'v': row.key}, {'v': row.value}]})
 
     response = {
@@ -120,12 +134,12 @@ def userDistribution_data():
 @app.route('/sourcePolarity_data')
 def sourcePolarity_data():
     rows = []
-    for row in list(db.view('source/PositivePolarity',group = True)):
-        rows.append({'c': [{'v': row.key}, {'v': row.value}]})
+    for row in list(db2.view('source/HappinessWithDevice',group = True)):
+        rows.append({'c': [{'v': row.key}, {'v': row.value[0]}]})
 
     response = {
         'cols': [{'id': 'sourcePolarity', 'label': 'sourcePolarity', 'type': 'string'},
-                 {'id': 'numbers', 'label': 'users', 'type': 'number'}],
+                 {'id': 'numbers', 'label': 'avg_polarity', 'type': 'number'}],
         'rows': rows
     }
 
@@ -163,7 +177,7 @@ def sourceDistribution_data():
 @app.route('/hour_data_avg')
 def hour_data_avg():
     rows = []
-    for row in list(db.view('24HourHappiness/24Hour', group=True)):
+    for row in list(db2.view('24HourHappiness/24Hour', group=True)):
             rows.append({'c': [{'v': row.key}, {'v': row.value[0]}, {'v': row.value[1]}]})
 
     response = {
@@ -177,7 +191,7 @@ def hour_data_avg():
 @app.route('/hour_data_number')
 def hour_data_number():
     rows = []
-    for row in list(db.view('24HourHappiness/24Hour', group=True)):
+    for row in list(db2.view('24HourHappiness/24Hour', group=True)):
             rows.append({'c': [{'v': row.key}, {'v': row.value[1]}]})
 
     response = {

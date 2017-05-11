@@ -1,0 +1,18 @@
+*** Starting uWSGI 2.0.15 (64bit) on [Wed May 10 10:41:43 2017] ***
+compiled with version: 5.4.0 20160609 on 09 May 2017 12:47:09
+os: Linux-4.4.0-72-generic #93-Ubuntu SMP Fri Mar 31 14:07:41 UTC 2017
+nodename: cloudn2
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /home/ubuntu/cloud_assignment/web/app
+detected binary path: /home/ubuntu/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+*** WARNING: you are running uWSGI without its master process manager ***
+your processes number limit is 23808
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+probably another instance of uWSGI is running on the same address (0.0.0.0:8000).
+bind(): Address already in use [core/socket.c line 769]

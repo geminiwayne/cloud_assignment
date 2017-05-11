@@ -75,7 +75,7 @@ header {
 }
 
 .gallery {
-	background-color: #6DC7D0;
+	background-color: #FFFFFF;
 }
 .thumbnail {
 	width: 23%;
@@ -115,14 +115,6 @@ header {
 	color: #FFFFFF;
 	text-align: center;
 	font-size:18px;
-}
-
-.cards {
-	width: 100%;
-	height: auto;
-	max-width: 400px;
-	max-height: 200px;
-	opacity: 0.8;
 }
 
 .button {
@@ -171,9 +163,11 @@ footer {
 	background-color: #6DC7D0;
 	height: auto;
 }
-.profile {
-	width: 50%;
+.picture.profile1 {
+	width: 80%;
+	align:center;
 }
+
 .Scenarios .thumbnail .tag {
 	color: #5D5E5D;
 	padding-bottom: 4px;

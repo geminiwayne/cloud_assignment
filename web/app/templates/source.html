@@ -3,8 +3,8 @@
 {% block title %}sourcePolarity{% endblock %}
 
 {% block intro %}
-<h5>scenario 5</h5>
-<h5>What is people sentiment when using different devices?</h5>
+<h5>scenario 4</h5>
+<h5>Sentiment when using different devices</h5>
 {% endblock %}
 {% block head %}
     <script type="text/javascript">
@@ -14,14 +14,23 @@
         google.charts.setOnLoadCallback(drawChart);
 
         function drawChart() {
+             $.getJSON("{{ url_for('sourceDistribution_data') }}", function (data) {
+                var data1 = new google.visualization.DataTable(data);
+                var options = {
+                    height: 500,
+                    title: 'The amount of different sources on different devices',
+                };
+                var chart1 = new google.visualization.PieChart(document.getElementById('chart_div1'));
+             chart1.draw(data1, options);
+            });
 
              $.getJSON("{{ url_for('sourcePolarity_data') }}", function (data) {
                 var data2 = new google.visualization.DataTable(data);
                 var options = {
                     height: 500,
-                    title: 'How about average sentiment towards on different devices?',
+                    title: 'Average sentiment towards on different devices?',
                 };
-                var chart2 = new google.visualization.PieChart(document.getElementById('chart_div2'));
+                var chart2 = new google.visualization.BarChart(document.getElementById('chart_div2'));
              chart2.draw(data2, options);
             });
          }
@@ -30,5 +39,6 @@
 {% endblock %}
 
 {% block column %}
+    <div id="chart_div1"></div>
     <div id="chart_div2"></div>
 {% endblock %}
