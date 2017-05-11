@@ -15,6 +15,7 @@ app = Flask(__name__)
 server = Server('http://admin:password@115.146.93.201:5984/')
 db = server['twitter']
 db2 = server['twdata']
+db3 = server['new_tweet']
 
 @app.route('/')
 def arch():
@@ -67,7 +68,7 @@ def sport():
 @app.route('/districtPolarity_data')
 def districtPolarity_data():
     rows = []
-    for row in list(db2.view('polarity/DistrictPolarity',group=True)):
+    for row in list(db3.view('polarity/DistrictPolarity',group=True)):
             rows.append({'c': [{'v': row.key}, {'v': row.value[0]}]})
 
     response = {
