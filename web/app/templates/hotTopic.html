@@ -27,9 +27,20 @@
              chart1.draw(data1, options);
             });
          }
+             $.getJSON("{{ url_for('popular_data') }}", function (data) {
+                var data2 = new google.visualization.DataTable(data);
+                data2.sort({column: 1, desc: true}); 
+                var options = {
+                    height: 500,
+                    title: 'popular users',
+                };
+                var chart2 = new google.visualization.BarChart(document.getElementById('chart_div2'));
+             chart2.draw(data2, options);
+            });
     </script>
 {% endblock %}
 
 {% block column %}
     <div id="chart_div1"></div>
+    <div id="chart_div2"></div>
 {% endblock %}

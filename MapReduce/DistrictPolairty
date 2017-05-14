@@ -1,0 +1,46 @@
+/*
+* Team 4
+* Melbourne, Sydney, Brisbane, Perth
+* Danping Zeng      777691
+* Dong Wang         773504
+* Jia Zhen          732355
+* Jinghan Liang     732329
+* Sixue Yang        722804
+*/
+
+// This MapReduce is designed to classify tweets into districts based on their coordinates
+
+// Map function to match each twitter to a particular district based on coordinates information
+function (doc) {
+  var districts = ["Abbotsford","Aberfeldie","Airport West","Albanvale","Albert Park","Albion","Alphington","Altona","Altona Meadows","Altona North","Ardeer","Armadale","Ascot Vale","Ashburton","Ashwood","Aspendale","Aspendale Gardens","Avondale Heights","Balaclava","Balwyn","Balwyn North","Beaumaris","Bellfield","Bentleigh","Bentleigh East","Black Rock","Blackburn","Blackburn North","Blackburn South","Bonbeach","Box Hill","Box Hill North","Box Hill South","Braybrook","Briar Hill","Brighton","Brighton East","Brooklyn","Brunswick","Brunswick East","Brunswick West","Bundoora","Burnley","Burnside","Burnside Heights","Burwood","Burwood East","Cairnlea","Camberwell","Canterbury","Carlton","Carlton North","Carnegie","Caroline Springs","Carrum","Caulfield","Caulfield East","Caulfield North","Caulfield South","Chadstone","Chelsea","Chelsea Heights","Cheltenham","Clarinda","Clayton","Clayton South","Clifton Hill","Coburg","Coburg North","Collingwood","Cremorne","Deer Park","Delahey","Derrimut","Dingley Village","Docklands","Doncaster East","Donvale","Eaglemont","East Melbourne","Edithvale","Elsternwick","Elwood","Essendon","Essendon North","Essendon West","Fairfield","Fawkner","Fitzroy","Fitzroy North","Flemington","Footscray","Forest Hill","Gardenvale","Gladstone Park","Glen Huntly","Glen Iris","Glen Waverley","Glenroy","Gowanbrae","Greensborough","Hadfield","Hampton","Hampton East","Hawthorn","Hawthorn East","Heatherton","Heidelberg","Heidelberg Heights","Heidelberg West","Highett","Hillside","Hughesdale","Huntingdale","Ivanhoe","Ivanhoe East","Kealba","Keilor","Keilor Downs","Keilor East","Keilor Lodge","Keilor North","Keilor Park","Kensington","Kew","Kew East","Kings Park","Kingsbury","Kingsville","Kooyong","Laverton","Lower Plenty","Macleod","Maidstone","Malvern","Malvern East","Manningham","Maribyrnong","McKinnon","Melbourne","Mentone","Middle Park","Mitcham","Mont Albert","Mont Albert North","Montmorency","Moonee Ponds","Moorabbin","Mordialloc","Mount Waverley","Mulgrave","Murrumbeena","Newport","Niddrie","North Melbourne","North Warrandyte","Northcote","Notting Hill","Nunawading","Oak Park","Oakleigh","Oakleigh East","Oakleigh South","Ormond","Park Orchards","Parkdale","Parkville","Pascoe Vale","Pascoe Vale South","Patterson Lakes","Point Cook","Port Melbourne","Prahran","Preston","Princes Hill","Quandong","Reservoir","Richmond","Ringwood","Ringwood North","Ripponlea","Rosanna","Sandringham","Seabrook","Seaholme","Seddon","South Kingsville","South Melbourne","South Wharf","South Yarra","Southbank","Spotswood","Springvale South","St Albans","St Helena","St Kilda","St Kilda East","St Kilda West","Strathmore","Strathmore Heights","Sunshine","Sunshine North","Sunshine West","Surrey Hills","Sydenham","Taylors Hill","Taylors Lakes","Templestowe","Thornbury","Toorak","Travancore","Tullamarine","Vermont","Vermont South","Viewbank","Warrandyte","Warrandyte South","Warranwood","Waterways","Watsonia","Watsonia North","Werribee","Werribee South","West Footscray","West Melbourne","Wheelers Hill","Williamstown","Williamstown North","Windsor","Wonga Park","Yallambie","Yarraville"];
+  var location = doc.location.toLowerCase();
+  var polarity = doc.polarity;
+  
+  for(d in districts) {
+    if(location.search(districts[d].toLowerCase()) > -1) {
+      if(polarity > 0)
+        emit(districts[d], 1);
+      else if(polarity = 0)
+        emit(districts[d], 0);
+      else
+        emit(districts[d], -1);
+    }
+  }
+}
+
+
+
+// Reduce function to return the total amount of tweets in each district
+// and its average polarity
+function(keys, values, rereduce) {
+    if (!rereduce){
+        var length = values.length
+        return [sum(values) / length, length]
+    }else{
+        var length = sum(values.map(function(v){return v[1]}))
+        var avg = sum(values.map(function(v){
+        return v[0] * (v[1] / length)
+    }))
+    return [avg, length]
+    }
+}
