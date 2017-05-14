@@ -1,6 +1,6 @@
 ---
-- hosts: dbservers
-  sudo: yes
-  tasks:
-    - name: Connect detect
-      shell: echo "Server Connected"
+- include: couchdb.yaml
+- include: datacrawler.yaml
+- include: runcrawer.yaml
+- include: webserver.yaml
+- include: monitor.yaml

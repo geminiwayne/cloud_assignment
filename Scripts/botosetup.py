@@ -1,13 +1,3 @@
-#################################
-#Team 4                         #
-#Melbourne,Sydney,Brisbane,Perth#
-#Dong Wang     773504           #
-#Danping Zeng  777691           #
-#Jia Zhen      732355           #
-#Jinghan Liang 732329           #
-#Sixue Yang    722804           #
-#################################
-
 import boto 
 from boto.ec2.regioninfo import RegionInfo 
 from pprint import pprint
@@ -74,13 +64,17 @@ for g in group:
 #print reservations[idx].id
 
 #create instance
-#count = int(ins_num)
-#for i in range(count):
-#    ec2_conn.run_instances('ami-00003a61', key_name='cloud', placement='melbourne',instance_type='m2.medium', security_groups=['default','cloud'])
+count = int(ins_num)
+for i in range(count):
+    ec2_conn.run_instances('ami-00003a61', key_name='cloud', placement='melbourne',instance_type='m2.medium', security_groups=['default','cloud'])
+
+print 'Instances have been created.'
 
 #create&attach volume
 
-#for o in range(count):
-#    ec2_conn.create_volume(60,"melbourne-np")
-#    ec2_conn.attach_volume(volumes[o].id,reservations[o].id,"/dev/vdb")
+for o in range(count):
+    ec2_conn.create_volume(60,"melbourne-np")
+    ec2_conn.attach_volume(volumes[o].id,reservations[o].id,"/dev/vdb")
+
+print 'Volumes have been attached.'
 

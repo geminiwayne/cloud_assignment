@@ -1,0 +1,5 @@
+---
+- hosts: dbservers
+  tasks:
+    -name: run data crawler
+     shell: cd /home/ubuntu/harvesters; nohup python main.py config.txt &

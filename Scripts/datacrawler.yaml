@@ -1,0 +1,17 @@
+---
+- hosts: dbservers
+  tasks:
+    - name: clone repository
+      git: repo=git@github.com:geminiwayne/cloud_assignment.git dest=/home/ubuntu/cloud_assignment clone=yes update=no
+
+    - name : install tweepy and others
+      apt: pkg=python-couchdb state=latest
+
+    - name : install tweepy and others
+      apt: pkg=python-tweepy state=latest
+
+    - name : install pip
+      easy_install: name=pip state=latest
+
+    - name : install textbolb
+      pip: textbolb state = latest
